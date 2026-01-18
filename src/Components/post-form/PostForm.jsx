@@ -3,7 +3,7 @@ import { useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom";
 import { useForm, Watch } from "react-hook-form";
 import { Input, Select, Button, RTE } from '../index'
-import authService from '../../appwrite/config'
+import Service from '../../appwrite/config'
 
 function PostForm({ post }) {
 
@@ -20,22 +20,22 @@ function PostForm({ post }) {
 
     const submit = async (data) => {
         if (post) {
-            const file = data.image[0] ? await authService.uploadFile(data.image[0]) : null
+            const file = data.image[0] ? await Service.uploadFile(data.image[0]) : null
             if (file) {
-                await authService.deleteFile(post.featuredImage)
+                await Service.deleteFile(post.featuredImage)
             }
-            const uPost = await authService.updatePost(post.$id, { ...data, featuredImage: file ? file.$id : undefined })
+            const uPost = await Service.updatePost(post.$id, { ...data, featuredImage: file ? file.$id : undefined })
             if (uPost) {
                 navigate(`post/${uPost.$id}`)
             }
 
 
         } else {
-            const file = await authService.uploadFile(data.image[0])
+            const file = await Service.uploadFile(data.image[0])
             if (file) {
                 const fileId = file.$id
                 data.featuredImage = fileId
-                const cPost = await authService.createPost({ ...data, userId: userData.$id })
+                const cPost = await Service.createPost({ ...data, userId: userData.$id })
                 if (cPost) {
                     navigate(`post/${cPost.$id}`)
                 }
@@ -84,7 +84,7 @@ function PostForm({ post }) {
                 {
                     post && (
                         <div  className="w-full mb-4">
-                            <img src={authService.getFilePreview(post.featuredImage)} alt={post.title} className="rounded-lg"/>
+                            <img src={Service.getFilePreview(post.featuredImage)} alt={post.title} className="rounded-lg"/>
                         </div>
                     )
                 }
