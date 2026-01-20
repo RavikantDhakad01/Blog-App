@@ -9,7 +9,6 @@ import Service from '../../appwrite/config'
 function PostForm({ post }) {
 
     const userData = useSelector((state) => state.auth.user)
-    console.log(userData)
     const navigate = useNavigate()
     const { register, control, handleSubmit, getValues, setValue, watch } = useForm({
         defaultValues: {
