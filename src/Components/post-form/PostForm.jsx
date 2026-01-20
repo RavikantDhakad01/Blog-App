@@ -9,6 +9,7 @@ import Service from '../../appwrite/config'
 function PostForm({ post }) {
 
     const userData = useSelector((state) => state.auth.user)
+    console.log(userData)
     const navigate = useNavigate()
     const { register, control, handleSubmit, getValues, setValue, watch } = useForm({
         defaultValues: {
@@ -27,7 +28,7 @@ function PostForm({ post }) {
             }
             const uPost = await Service.updatePost(post.$id, { ...data, featuredImage: file ? file.$id : undefined })
             if (uPost) {
-                navigate(`post/${uPost.$id}`)
+                navigate(`/post/${uPost.$id}`)
             }
 
 
@@ -38,7 +39,7 @@ function PostForm({ post }) {
                 data.featuredImage = fileId
                 const cPost = await Service.createPost({ ...data, userId: userData.$id })
                 if (cPost) {
-                    navigate(`post/${cPost.$id}`)
+                    navigate(`/post/${cPost.$id}`)
                 }
             }
         }
