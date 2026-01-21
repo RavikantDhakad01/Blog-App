@@ -8,7 +8,7 @@ function Header() {
       {
          name: "Home",
          path: '/',
-         active: true
+         active: authStatus
       },
       {
          name: "Login",
