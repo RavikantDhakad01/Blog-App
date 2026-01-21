@@ -31,10 +31,10 @@ function Header() {
       <>
          <header className='shadow bg-gray-600'>
             <Container>
-               <nav className='flex items-center justify-between py-3'>
+               <nav className='h-16 flex items-center justify-between '>
                  
-                     <Link to='/' className='flex items-center'>
-                        <Logo size='w-10' />
+                     <Link to='/' className='flex items-center h-full'>
+                        <Logo size='w-22' />
                      </Link>
 
 
